@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 
 interface IWeekColumnsProps {
-  downloadsDataWeek: [];
+  downloadsDataWeek: object[];
 }
 
 const WeekColumns = ({ downloadsDataWeek }:IWeekColumnsProps) => {
