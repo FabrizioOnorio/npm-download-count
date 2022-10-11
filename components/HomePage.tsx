@@ -1,6 +1,7 @@
 import React,  { useState } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import MonthColumns from './MonthColumns';
+import WeekColumns from './WeekColumns';
 
 const HomePage = () => {
   const [packageName, setPackageName] = useState('');
@@ -23,7 +24,7 @@ const HomePage = () => {
     setPackageName('');
   }
 
-  if (downloadsData) return (
+  if (downloadsData && downloadsDataWeek) return (
     <>
       <h1>Npm Downloads</h1>
       <form onSubmit={handleSubmit}>
@@ -31,23 +32,7 @@ const HomePage = () => {
       </form>
       <h2>{displayNpmName}</h2>
       <MonthColumns downloadsData={downloadsData} />
-      <VictoryChart
-        domainPadding={20}
-        theme={VictoryTheme.material}
-      >
-        <VictoryAxis
-          tickValues={[]}
-          tickFormat={[]}
-        />
-      <VictoryAxis
-        dependentAxis
-        tickFormat={(x) => (`${x / 1000}k`)} />
-      <VictoryBar
-        data={downloadsDataWeek}
-        x={'day'}
-        y={'downloads'}
-        />
-      </VictoryChart>
+      <WeekColumns downloadsDataWeek={downloadsDataWeek} />
     </>
   )
   return <p>loading...</p>
