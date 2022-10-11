@@ -1,5 +1,6 @@
 import React,  { useState } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import MonthColumns from './MonthColumns';
 
 const HomePage = () => {
   const [packageName, setPackageName] = useState('');
@@ -17,34 +18,19 @@ const HomePage = () => {
       const lastWeekData = data.downloads.slice(data.downloads.length - 7)
       setDownloadsDataWeek(lastWeekData)
     }
+    console.log(downloadsData)
 
     setPackageName('');
   }
 
-  return (
+  if (downloadsData) return (
     <>
       <h1>Npm Downloads</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" value={packageName} onChange={e => setPackageName(e.target.value)} required />
       </form>
       <h2>{displayNpmName}</h2>
-      <VictoryChart
-        domainPadding={20}
-        theme={VictoryTheme.material}
-      >
-        <VictoryAxis
-          tickValues={[]}
-          tickFormat={[]}
-        />
-      <VictoryAxis
-        dependentAxis
-        tickFormat={(x) => (`${x / 1000}k`)} />
-      <VictoryBar
-        data={downloadsData}
-        x={'day'}
-        y={'downloads'}
-        />
-      </VictoryChart>
+      <MonthColumns downloadsData={downloadsData} />
       <VictoryChart
         domainPadding={20}
         theme={VictoryTheme.material}
@@ -64,6 +50,7 @@ const HomePage = () => {
       </VictoryChart>
     </>
   )
+  return <p>loading...</p>
 }
 
 export default HomePage;
