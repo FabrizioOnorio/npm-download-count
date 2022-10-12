@@ -8,6 +8,8 @@ const HomePage = () => {
   const [downloadsData, setDownloadsData] = useState<object[]>([]);
   const [downloadsDataWeek, setDownloadsDataWeek] = useState<object[]>([]);
   const [displayNpmName, setDisplayNpmName] = useState();
+  const [numberDownloadsMonthly, setNumberDownloadsMonthly] = useState();
+  const [numberDownloadsWeekly, setNumberDownloadsWeekly] = useState();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,9 +21,14 @@ const HomePage = () => {
       setDisplayNpmName(data.package[0].toUpperCase() + data.package.substr(1));
       const lastWeekData = data.downloads.slice(data.downloads.length - 7)
       setDownloadsDataWeek(lastWeekData)
+      const totalMonthlyDownloads = data.downloads.reduce((acc: number, curr: {downloads: number}) => acc + curr.downloads, 0)
+      setNumberDownloadsMonthly(totalMonthlyDownloads);
+      const totalWeeklyDownloads = lastWeekData.reduce((acc: number, curr: {downloads: number}) => acc + curr.downloads, 0)
+      setNumberDownloadsWeekly(totalWeeklyDownloads);
     }
     setPackageName('');
   }
+
 
   if (downloadsData && downloadsDataWeek) return (
     <>
@@ -32,7 +39,9 @@ const HomePage = () => {
         setPackageName={setPackageName}
       />
       <h2>{displayNpmName}</h2>
+      <h3>Total number of downloads in the last 30 days:{' ' + numberDownloadsMonthly}</h3>
       <MonthColumns downloadsData={downloadsData} />
+      <h3>Total number of downloads in the last 7 days:{' ' + numberDownloadsWeekly}</h3>
       <WeekColumns downloadsDataWeek={downloadsDataWeek} />
     </>
   )
