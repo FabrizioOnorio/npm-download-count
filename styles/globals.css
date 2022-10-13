@@ -15,16 +15,21 @@ a {
   box-sizing: border-box;
 }
 
+.homePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
 .graphsData {
   display: none;
 }
 
-.monthlyGraph {
-  max-width: 600px;
-}
-
-.weeklyGraph {
-  max-width: 600px;
+.twoGraphs {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -40,21 +40,27 @@ const HomePage = () => {
 
 	if (downloadsData && downloadsDataWeek)
 		return (
-			<>
+			<div className="homePage">
 				<h1>Npm Downloads</h1>
 				<InputSearch
 					handleSubmit={handleSubmit}
 					packageName={packageName}
 					setPackageName={setPackageName}
 				/>
-				<div className={downloadsData.length === 0 ? "graphsData" : ""}>
+				<div className={downloadsData.length === 0 ? "graphsData" : "graphsAreShowing"}>
 					<h2>{displayNpmName}</h2>
-					<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
-					<WeekColumns downloadsDataWeek={downloadsDataWeek} />
-					<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
-					<MonthColumns downloadsData={downloadsData} />
+					<div className="twoGraphs">
+						<div>
+							<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
+							<WeekColumns downloadsDataWeek={downloadsDataWeek} />
+						</div>
+						<div>
+							<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
+							<MonthColumns downloadsData={downloadsData} />
+						</div>
+					</div>
 				</div>
-			</>
+			</div>
 		);
 	return <p>loading...</p>;
 };
