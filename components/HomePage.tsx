@@ -10,7 +10,6 @@ const HomePage = () => {
 	const [displayNpmName, setDisplayNpmName] = useState();
 	const [numberDownloadsMonthly, setNumberDownloadsMonthly] = useState();
 	const [numberDownloadsWeekly, setNumberDownloadsWeekly] = useState();
-
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		const response = await fetch(`/api/downloads/${packageName}`);
@@ -48,13 +47,13 @@ const HomePage = () => {
 					packageName={packageName}
 					setPackageName={setPackageName}
 				/>
-				<h2>{displayNpmName}</h2>
-				<h3>{numberDownloadsMonthly + " "} downloads during the last month</h3>
-				<div className="graph">
+				<div className={downloadsData.length === 0 ? "graphsData" : ""}>
+					<h2>{displayNpmName}</h2>
+					<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
+					<WeekColumns downloadsDataWeek={downloadsDataWeek} />
+					<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
 					<MonthColumns downloadsData={downloadsData} />
 				</div>
-				<h3>{numberDownloadsWeekly + " "} downloads during last week</h3>
-				<WeekColumns downloadsDataWeek={downloadsDataWeek} />
 			</>
 		);
 	return <p>loading...</p>;
