@@ -23,7 +23,7 @@ const HomePage = () => {
       setDownloadsDataWeek(lastWeekData)
       const totalMonthlyDownloads = data.downloads.reduce((acc: number, curr: {downloads: number}) => acc + curr.downloads, 0).toLocaleString('de')
       setNumberDownloadsMonthly(totalMonthlyDownloads);
-      const totalWeeklyDownloads = lastWeekData.reduce((acc: number, curr: {downloads: number}) => acc + curr.downloads, 0)
+      const totalWeeklyDownloads = lastWeekData.reduce((acc: number, curr: {downloads: number}) => acc + curr.downloads, 0).toLocaleString('de')
       setNumberDownloadsWeekly(totalWeeklyDownloads);
     }
     setPackageName('');
