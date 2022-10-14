@@ -257,6 +257,11 @@
     "json-schema-traverse" "^0.4.1"
     "uri-js" "^4.2.2"
 
+"all-the-package-names@^2.0.369":
+  "integrity" "sha512-o9bFgpLBnRvdn/yiVazB5q15dPKwP9ygzGmvIh/n/2G2HfQ6sXKfKMuBrsw9dgnsR6KcC0oUag2XzWAp6ynFeA=="
+  "resolved" "https://registry.npmjs.org/all-the-package-names/-/all-the-package-names-2.0.369.tgz"
+  "version" "2.0.369"
+
 "ansi-regex@^5.0.1":
   "integrity" "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="
   "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
