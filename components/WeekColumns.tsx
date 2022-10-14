@@ -13,7 +13,7 @@ const WeekColumns = ({ downloadsDataWeek }: IWeekColumnsProps) => {
 				theme={VictoryTheme.material}
 				animate={{
 					duration: 2000,
-					onLoad: { duration: 1000 },
+					onLoad: { duration: 500 },
 				}}
 				width={400}
 				height={200}
@@ -21,7 +21,7 @@ const WeekColumns = ({ downloadsDataWeek }: IWeekColumnsProps) => {
 					background: { fill: "white" },
 				}}
 			>
-				<VictoryAxis tickValues={[]} tickFormat={[]} />
+				<VictoryAxis tickValues={[1]} tickFormat={[]} />
 				<VictoryAxis dependentAxis tickFormat={(x) => `${x / 1000}k`} />
 				<VictoryBar data={downloadsDataWeek} x={"day"} y={"downloads"} />
 			</VictoryChart>

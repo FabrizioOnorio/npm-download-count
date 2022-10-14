@@ -12,7 +12,7 @@ const MonthColumns = ({ downloadsData }: IMonthColumnsProps) => {
 				theme={VictoryTheme.material}
 				animate={{
 					duration: 2000,
-					onLoad: { duration: 1000 },
+					onLoad: { duration: 500 },
 				}}
 				width={400}
 				height={200}
@@ -21,7 +21,11 @@ const MonthColumns = ({ downloadsData }: IMonthColumnsProps) => {
 				}}
 			>
 				<VictoryAxis tickValues={[]} tickFormat={[]} />
-				<VictoryAxis dependentAxis tickFormat={(x) => `${x / 1000}k`} />
+				<VictoryAxis
+					dependentAxis
+					tickFormat={(x) => `${x / 1000}k`}
+					offsetX={46}
+				/>
 				<VictoryBar data={downloadsData} x={"day"} y={"downloads"} />
 			</VictoryChart>
 		</div>

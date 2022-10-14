@@ -18,8 +18,8 @@ a {
 .homePage {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
+  text-align: center;
+  gap: 2rem;
 }
 
 .graphsData {
@@ -28,8 +28,9 @@ a {
 
 .twoGraphs {
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media (prefers-color-scheme: dark) {
