@@ -19,7 +19,7 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .graphsData {
@@ -31,6 +31,14 @@ a {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.descriptionHidden {
+  display: none;
+}
+
+.linkHidden {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {

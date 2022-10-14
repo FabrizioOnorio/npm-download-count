@@ -10,10 +10,16 @@ const HomePage = () => {
 	const [displayNpmName, setDisplayNpmName] = useState();
 	const [numberDownloadsMonthly, setNumberDownloadsMonthly] = useState();
 	const [numberDownloadsWeekly, setNumberDownloadsWeekly] = useState();
+	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
+		{ description: "", homepage: "" }
+	);
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		const response = await fetch(`/api/downloads/${packageName}`);
 		const data = await response.json();
+		const responseInfos = await fetch(`/api/informations/${packageName}`);
+		const dataInfos = await responseInfos.json();
+		setInfos(dataInfos);
 		if (data.downloads === undefined) alert("package not found");
 		if (data.downloads !== undefined) {
 			setDownloadsData(data.downloads);
@@ -38,7 +44,7 @@ const HomePage = () => {
 		setPackageName("");
 	};
 
-	if (downloadsData && downloadsDataWeek)
+	if (downloadsData && downloadsDataWeek && infos)
 		return (
 			<div className="homePage">
 				<h1>Npm Downloads</h1>
@@ -47,7 +53,29 @@ const HomePage = () => {
 					packageName={packageName}
 					setPackageName={setPackageName}
 				/>
-				<div className={downloadsData.length === 0 ? "graphsData" : "graphsAreShowing"}>
+				<p
+					className={
+						infos.description.length > 0
+							? "descriptionVisible"
+							: "descriptionHidden"
+					}
+				>
+					Description: {" " + infos.description}
+				</p>
+				<p
+					className={
+						infos.homepage.length > 0
+							? "linkVisible"
+							: "linkHidden"
+					}
+				>
+					Homepage: <a href={infos.homepage}>{" " + infos.homepage}</a>
+				</p>
+				<div
+					className={
+						downloadsData.length === 0 ? "graphsData" : "graphsAreShowing"
+					}
+				>
 					<h2>{displayNpmName}</h2>
 					<div className="twoGraphs">
 						<div>
