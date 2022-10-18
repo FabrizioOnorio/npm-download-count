@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import InputSearch from "./InputSearch";
 import MonthColumns from "./MonthColumns";
+import Package from "./Package";
 import WeekColumns from "./WeekColumns";
 
 const HomePage = () => {
 	const [packageName, setPackageName] = useState("");
 	const [downloadsData, setDownloadsData] = useState<object[]>([]);
 	const [downloadsDataWeek, setDownloadsDataWeek] = useState<object[]>([]);
-	const [displayNpmName, setDisplayNpmName] = useState();
-	const [numberDownloadsMonthly, setNumberDownloadsMonthly] = useState();
-	const [numberDownloadsWeekly, setNumberDownloadsWeekly] = useState();
+	const [displayNpmName, setDisplayNpmName] = useState("");
+	const [numberDownloadsMonthly, setNumberDownloadsMonthly] = useState(0);
+	const [numberDownloadsWeekly, setNumberDownloadsWeekly] = useState(0);
 	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
 		{ description: "", homepage: "" }
 	);
@@ -53,41 +54,14 @@ const HomePage = () => {
 					packageName={packageName}
 					setPackageName={setPackageName}
 				/>
-				<p
-					className={
-						infos.description.length > 0
-							? "descriptionVisible"
-							: "descriptionHidden"
-					}
-				>
-					Description: {" " + infos.description}
-				</p>
-				<p
-					className={
-						infos.homepage.length > 0
-							? "linkVisible"
-							: "linkHidden"
-					}
-				>
-					Homepage: <a href={infos.homepage}>{" " + infos.homepage}</a>
-				</p>
-				<div
-					className={
-						downloadsData.length === 0 ? "graphsData" : "graphsAreShowing"
-					}
-				>
-					<h2>{displayNpmName}</h2>
-					<div className="twoGraphs">
-						<div>
-							<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
-							<WeekColumns downloadsDataWeek={downloadsDataWeek} />
-						</div>
-						<div>
-							<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
-							<MonthColumns downloadsData={downloadsData} />
-						</div>
-					</div>
-				</div>
+				<Package
+					infos={infos}
+					downloadsData={downloadsData}
+					downloadsDataWeek={downloadsDataWeek}
+					displayNpmName={displayNpmName}
+					numberDownloadsMonthly={numberDownloadsMonthly}
+					numberDownloadsWeekly={numberDownloadsWeekly}
+				/>
 			</div>
 		);
 	return <p>loading...</p>;
