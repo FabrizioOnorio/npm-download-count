@@ -18,7 +18,7 @@ const InputSearch = ({
 				type="text"
 				value={packageName}
 				onChange={(e) => setPackageName(e.target.value)}
-				required
+				className="border border-red-900 rounded-md p-2"
 			/>
 		</form>
 	);
