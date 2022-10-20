@@ -27,7 +27,7 @@ const Package = ({
 			<p
 				className={
 					infos.description.length > 0
-						? "descriptionVisible"
+						? ""
 						: "descriptionHidden"
 				}
 			>
