@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import InputSearch from "./InputSearch";
-import MonthColumns from "./MonthColumns";
 import Package from "./Package";
-import WeekColumns from "./WeekColumns";
 
 const HomePage = () => {
 	const [packageName, setPackageName] = useState("");
