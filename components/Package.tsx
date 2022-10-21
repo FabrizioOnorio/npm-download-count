@@ -31,10 +31,10 @@ const Package = ({
 						: "descriptionHidden"
 				}
 			>
-				Description: {" " + infos.description}
+				{" " + infos.description}
 			</p>
 			<p className={infos.homepage.length > 0 ? "linkVisible" : "linkHidden"}>
-				Homepage: <a href={infos.homepage}>{" " + infos.homepage}</a>
+				<a href={infos.homepage}>{" " + infos.homepage}</a>
 			</p>
 			<div
 				className={
