@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputSearch from "./InputSearch";
 import Package from "./Package";
+import { useQuery } from "react-query";
 
 const HomePage = () => {
 	const [packageName, setPackageName] = useState("");
@@ -12,16 +13,16 @@ const HomePage = () => {
 	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
 		{ description: "", homepage: "" }
 	);
+
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-		const response = await fetch(`/api/downloads/${packageName}`);
-		const data = await response.json();
 		const responseInfos = await fetch(`/api/informations/${packageName}`);
 		const dataInfos = await responseInfos.json();
 		setInfos(dataInfos);
+		const response = await fetch(`/api/downloads/${packageName}`);
+		const data = await response.json();
 		if (data.downloads === undefined) alert("package not found");
 		if (data.downloads !== undefined) {
-			setDownloadsData(data.downloads);
 			setDisplayNpmName(data.package[0].toUpperCase() + data.package.substr(1));
 			const lastWeekData = data.downloads.slice(data.downloads.length - 7);
 			setDownloadsDataWeek(lastWeekData);
@@ -40,9 +41,23 @@ const HomePage = () => {
 				.toLocaleString("de");
 			setNumberDownloadsWeekly(totalWeeklyDownloads);
 		}
+		refetch();
 		setPackageName("");
 	};
+	const getNumberDownloads = async () => {
+		const response = await fetch(`/api/downloads/${packageName}`);
+		return response.json();
+	};
 
+	const { data, refetch } = useQuery("numberDownloads", getNumberDownloads, {
+		refetchOnWindowFocus: false,
+		enabled: false,
+	});
+
+	useEffect(() => {
+		if (data?.downloads !== undefined) setDownloadsData(data.downloads);
+		console.log(data?.downloads);
+	}, [data?.downloads]);
 	if (downloadsData && downloadsDataWeek && infos)
 		return (
 			<div className="homePage">
