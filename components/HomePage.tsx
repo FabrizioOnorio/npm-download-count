@@ -35,17 +35,16 @@ const HomePage = () => {
 		enabled: false,
 	});
 
-
 	useEffect(() => {
-    if (data?.downloads === undefined) alert("package not found");
+		if (data?.downloads === undefined) alert("package not found");
 		if (data?.downloads !== undefined) setDownloadsData(data.downloads);
-    const totalMonthlyDownloads = data?.downloads
+		const totalMonthlyDownloads = data?.downloads
 			.reduce(
 				(acc: number, curr: { downloads: number }) => acc + curr.downloads,
 				0
 			)
 			.toLocaleString("de");
-      if (data?.downloads !== undefined) {
+		if (data?.downloads !== undefined) {
 			setDisplayNpmName(data.package[0].toUpperCase() + data.package.substr(1));
 			const lastWeekData = data.downloads.slice(data.downloads.length - 7);
 			setDownloadsDataWeek(lastWeekData);
@@ -60,24 +59,26 @@ const HomePage = () => {
 		setNumberDownloadsMonthly(totalMonthlyDownloads);
 	}, [data?.downloads]);
 
-		return (
-			<div className="homePage">
-				<h1>Npm Downloads</h1>
+	return (
+		<div className="homePage">
+			<h1>Npm Downloads</h1>
+			<div>
 				<InputSearch
 					handleSubmit={handleSubmit}
 					packageName={packageName}
 					setPackageName={setPackageName}
 				/>
-				<Package
-					infos={infos}
-					downloadsData={downloadsData}
-					downloadsDataWeek={downloadsDataWeek}
-					displayNpmName={displayNpmName}
-					numberDownloadsMonthly={numberDownloadsMonthly}
-					numberDownloadsWeekly={numberDownloadsWeekly}
-				/>
 			</div>
-		);
+			<Package
+				infos={infos}
+				downloadsData={downloadsData}
+				downloadsDataWeek={downloadsDataWeek}
+				displayNpmName={displayNpmName}
+				numberDownloadsMonthly={numberDownloadsMonthly}
+				numberDownloadsWeekly={numberDownloadsWeekly}
+			/>
+		</div>
+	);
 };
 
 export default HomePage;
