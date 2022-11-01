@@ -17,6 +17,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const params = req.query;
 	if (params.param !== undefined) {
 		const dataInformations = await fetchHandlerInfos(params.param[0]);
+    if (dataInformations.error === "Not found") return res
+			.status(200)
+			.json({ description: "Package", homepage: "not found" });
     const description: string = dataInformations.description;
     const homepage: string = dataInformations.homepage;
 		res.status(200).json({ description, homepage });

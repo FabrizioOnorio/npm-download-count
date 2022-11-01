@@ -1,5 +1,4 @@
 import React from "react";
-import names from "all-the-package-names";
 
 interface IInputSearchProps {
 	handleSubmit: (event: React.FormEvent) => Promise<void>;
@@ -17,7 +16,9 @@ const InputSearch = ({
 			<input
 				type="text"
 				value={packageName}
-				onChange={(e) => setPackageName(e.target.value)}
+				onChange={(e) => {
+					setPackageName(e.target.value);
+				}}
 				className="border-2 border-black-900 rounded-md p-2"
 			/>
 		</form>

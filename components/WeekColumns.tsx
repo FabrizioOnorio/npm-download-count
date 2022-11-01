@@ -11,10 +11,10 @@ const WeekColumns = ({ downloadsDataWeek }: IWeekColumnsProps) => {
 			<VictoryChart
 				domainPadding={20}
 				theme={VictoryTheme.material}
-				// animate={{
-				// 	duration: 2000,
-				// 	onLoad: { duration: 500 },
-				// }}
+				animate={{
+					duration: 2000,
+					onLoad: { duration: 500 },
+				}}
 				width={400}
 				height={200}
 				style={{

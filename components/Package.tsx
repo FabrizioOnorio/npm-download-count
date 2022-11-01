@@ -22,6 +22,7 @@ const Package = ({
 	numberDownloadsMonthly,
 	numberDownloadsWeekly,
 }: IPackageProps) => {
+  if (infos === undefined) return <p>Package not found</p>
 	return (
 		<div>
 			<p
