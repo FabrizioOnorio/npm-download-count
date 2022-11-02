@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputSearch from "./InputSearch";
 import Package from "./Package";
 import { useQuery } from "react-query";
+import Link from "next/link";
 
 const HomePage = () => {
 	const [packageName, setPackageName] = useState("");
@@ -72,6 +73,7 @@ const HomePage = () => {
 					setPackageName={setPackageName}
 				/>
 			</div>
+      <Link href={"/favourites"}>Favourites</Link>
 			<Package
 				infos={infos}
 				downloadsData={downloadsData}
