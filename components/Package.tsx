@@ -52,7 +52,7 @@ const Package = ({
 	]);
 
 	const handleClick = () => {
-    setFavourites((prev) => [...prev, gatheredPackageData]);
+		setFavourites((prev) => [...prev, gatheredPackageData]);
 		console.log(gatheredPackageData);
 	};
 
@@ -80,8 +80,8 @@ const Package = ({
 						<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
 						<MonthColumns downloadsData={downloadsData} />
 					</div>
-					<button onClick={handleClick}>Save to compare</button>
 				</div>
+				<button onClick={handleClick}>Save to compare</button>
 			</div>
 		</div>
 	);

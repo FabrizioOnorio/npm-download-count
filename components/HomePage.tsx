@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import InputSearch from "./InputSearch";
 import Package from "./Package";
 import { useQuery } from "react-query";
 import Link from "next/link";
 
-const HomePage = () => {
+interface IHomePage {
+	setFavourites: Dispatch<SetStateAction<object[]>>;
+}
+
+const HomePage = ({ setFavourites }: IHomePage) => {
 	const [packageName, setPackageName] = useState("");
 	const [downloadsData, setDownloadsData] = useState<object[]>([]);
 	const [downloadsDataWeek, setDownloadsDataWeek] = useState<object[]>([]);
@@ -14,8 +18,6 @@ const HomePage = () => {
 	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
 		{ description: "", homepage: "" }
 	);
-  const [favourites, setFavourites] = useState<object[]>([]);
-  console.log(favourites)
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		const responseInfos = await fetch(`/api/informations/${packageName}`);
@@ -73,7 +75,7 @@ const HomePage = () => {
 					setPackageName={setPackageName}
 				/>
 			</div>
-      <Link href={"/favourites"}>Favourites</Link>
+			<Link href={"/favourites"}>Favourites</Link>
 			<Package
 				infos={infos}
 				downloadsData={downloadsData}

@@ -1,10 +1,13 @@
 import { NextPage } from "next";
 import react from "react";
+import FavouritePage from "../components/FavouritePage";
 
-export const Favourites: NextPage = () => {
-  return (
-    <p>hi</p>
-  )
+interface IFavouritesProps {
+	favourites: object[];
 }
+
+export const Favourites: NextPage<IFavouritesProps> = ({favourites}) => {
+	return <FavouritePage favourites={favourites} />;
+};
 
 export default Favourites;

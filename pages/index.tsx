@@ -2,11 +2,17 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import HomePage from "../components/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const Home: NextPage = () => {
-  const queryClient = new QueryClient();
+interface IHomeProps {
+	setFavourites: Dispatch<SetStateAction<object[]>>;
+}
+
+const Home: NextPage<IHomeProps> = ({ setFavourites } ) => {
+	const queryClient = new QueryClient();
+
 	return (
-		<QueryClientProvider client={queryClient} >
+		<QueryClientProvider client={queryClient}>
 			<div className="pb-0 py-10">
 				<Head>
 					<title>npm downloads</title>
@@ -16,7 +22,7 @@ const Home: NextPage = () => {
 					/>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
-				<HomePage />
+				<HomePage setFavourites={setFavourites} />
 			</div>
 		</QueryClientProvider>
 	);
