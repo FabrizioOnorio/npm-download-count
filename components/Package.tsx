@@ -12,6 +12,7 @@ interface IPackageProps {
 	displayNpmName: string;
 	numberDownloadsMonthly: number;
 	numberDownloadsWeekly: number;
+	setFavourites: React.Dispatch<React.SetStateAction<object[]>>;
 }
 
 const Package = ({
@@ -21,6 +22,7 @@ const Package = ({
 	displayNpmName,
 	numberDownloadsMonthly,
 	numberDownloadsWeekly,
+	setFavourites,
 }: IPackageProps) => {
 	const [gatheredPackageData, setGatheredPackageData] = useState({
 		downloadsData,
@@ -40,11 +42,19 @@ const Package = ({
 			numberDownloadsWeekly,
 			infos,
 		});
-	}, [displayNpmName, downloadsData, downloadsDataWeek, infos, numberDownloadsMonthly, numberDownloadsWeekly]);
+	}, [
+		displayNpmName,
+		downloadsData,
+		downloadsDataWeek,
+		infos,
+		numberDownloadsMonthly,
+		numberDownloadsWeekly,
+	]);
 
-  const handleClick = () => {
-    console.log(gatheredPackageData);
-  };
+	const handleClick = () => {
+    setFavourites((prev) => [...prev, gatheredPackageData]);
+		console.log(gatheredPackageData);
+	};
 
 	if (infos === undefined) return <p>Package not found</p>;
 	return (

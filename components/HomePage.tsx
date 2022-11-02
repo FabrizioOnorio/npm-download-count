@@ -13,6 +13,8 @@ const HomePage = () => {
 	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
 		{ description: "", homepage: "" }
 	);
+  const [favourites, setFavourites] = useState<object[]>([]);
+  console.log(favourites)
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		const responseInfos = await fetch(`/api/informations/${packageName}`);
@@ -77,6 +79,7 @@ const HomePage = () => {
 				displayNpmName={displayNpmName}
 				numberDownloadsMonthly={numberDownloadsMonthly}
 				numberDownloadsWeekly={numberDownloadsWeekly}
+				setFavourites={setFavourites}
 			/>
 		</div>
 	);
