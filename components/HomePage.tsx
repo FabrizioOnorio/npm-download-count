@@ -13,7 +13,6 @@ const HomePage = () => {
 	const [infos, setInfos] = useState<{ description: string; homepage: string }>(
 		{ description: "", homepage: "" }
 	);
-
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		const responseInfos = await fetch(`/api/informations/${packageName}`);
@@ -35,7 +34,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		if (data?.downloads !== undefined) setDownloadsData(data.downloads);
-    if  (data?.error === "not found") setDownloadsData([])
+		if (data?.error === "not found") setDownloadsData([]);
 		if (data?.error === undefined) {
 			const totalMonthlyDownloads = data?.downloads
 				.reduce(

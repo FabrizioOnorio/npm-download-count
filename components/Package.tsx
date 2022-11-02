@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WeekColumns from "./WeekColumns";
 import MonthColumns from "./MonthColumns";
 
@@ -22,16 +22,34 @@ const Package = ({
 	numberDownloadsMonthly,
 	numberDownloadsWeekly,
 }: IPackageProps) => {
-  if (infos === undefined) return <p>Package not found</p>
+	const [gatheredPackageData, setGatheredPackageData] = useState({
+		downloadsData,
+		downloadsDataWeek,
+		displayNpmName,
+		numberDownloadsMonthly,
+		numberDownloadsWeekly,
+		infos,
+	});
+
+	useEffect(() => {
+		setGatheredPackageData({
+			downloadsData,
+			downloadsDataWeek,
+			displayNpmName,
+			numberDownloadsMonthly,
+			numberDownloadsWeekly,
+			infos,
+		});
+	}, [displayNpmName, downloadsData, downloadsDataWeek, infos, numberDownloadsMonthly, numberDownloadsWeekly]);
+
+  const handleClick = () => {
+    console.log(gatheredPackageData);
+  };
+
+	if (infos === undefined) return <p>Package not found</p>;
 	return (
 		<div>
-			<p
-				className={
-					infos.description.length > 0
-						? ""
-						: "descriptionHidden"
-				}
-			>
+			<p className={infos.description.length > 0 ? "" : "descriptionHidden"}>
 				{" " + infos.description}
 			</p>
 			<p className={infos.homepage.length > 0 ? "linkVisible" : "linkHidden"}>
@@ -52,6 +70,7 @@ const Package = ({
 						<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
 						<MonthColumns downloadsData={downloadsData} />
 					</div>
+					<button onClick={handleClick}>Save to compare</button>
 				</div>
 			</div>
 		</div>

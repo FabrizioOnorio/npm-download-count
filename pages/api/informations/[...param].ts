@@ -17,11 +17,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const params = req.query;
 	if (params.param !== undefined) {
 		const dataInformations = await fetchHandlerInfos(params.param[0]);
-    if (dataInformations.error === "Not found") return res
-			.status(200)
-			.json({ description: "Package", homepage: "not found" });
-    const description: string = dataInformations.description;
-    const homepage: string = dataInformations.homepage;
+		if (dataInformations.error === "Not found")
+			return res.status(200).json({
+				description: "Package not found, more infos at:",
+				homepage: "https://www.npmjs.com/",
+			});
+		const description: string = dataInformations.description !== undefined ? dataInformations.description : "Description missing";
+		const homepage: string =
+			dataInformations.homepage !== undefined
+				? dataInformations.homepage
+				: "https://www.npmjs.com/";
 		res.status(200).json({ description, homepage });
 	}
 };
