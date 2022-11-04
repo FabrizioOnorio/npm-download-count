@@ -37,16 +37,19 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 		enabled: false,
 	});
 	useEffect(() => {
-		if (data?.downloads) setDownloadsData(data.downloads);
-		if (data?.error === "not found") setDownloadsData([]);
-		if (data?.error === undefined) {
+		if (data?.error === "not found") {
+			setDisplayNpmName("");
+			setDownloadsData([]);
+		}
+		if (data?.downloads) {
+			setDownloadsData(data.downloads);
 			const totalMonthlyDownloads = data?.downloads
 				.reduce(
 					(acc: number, curr: { downloads: number }) => acc + curr.downloads,
 					0
 				)
 				.toLocaleString("de");
-			if (data?.downloads !== undefined) {
+			if (data?.downloads) {
 				setDisplayNpmName(
 					data.package[0].toUpperCase() + data.package.substr(1)
 				);
@@ -62,7 +65,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 			}
 			setNumberDownloadsMonthly(totalMonthlyDownloads);
 		}
-	}, [data]);
+	}, [data, downloadsData, downloadsDataWeek]);
 
 	return (
 		<div className="homePage">
