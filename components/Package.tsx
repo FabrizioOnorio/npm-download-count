@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeekColumns from "./WeekColumns";
 import MonthColumns from "./MonthColumns";
+import { v4 as uuidv4 } from "uuid";
 
 interface IPackageProps {
 	downloadsData: object[];
@@ -31,6 +32,7 @@ const Package = ({
 		numberDownloadsMonthly,
 		numberDownloadsWeekly,
 		infos,
+		id: "",
 	});
 
 	useEffect(() => {
@@ -41,6 +43,7 @@ const Package = ({
 			numberDownloadsMonthly,
 			numberDownloadsWeekly,
 			infos,
+			id: uuidv4(),
 		});
 	}, [
 		displayNpmName,
