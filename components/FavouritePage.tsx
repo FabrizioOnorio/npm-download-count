@@ -23,7 +23,7 @@ const FavouritePage = ({ favourites }: IFavouritesPageProps) => {
 				</Link>
 			</div>
 			<div className="favouritesTitle">
-				<h2>Your List to compare:</h2>
+				<h2>{favourites.length > 0 ? 'Your List to compare:' : 'Nothing saved yet :-)'}</h2>
 			</div>
 			<div className="favouritesList">
 				{favourites.map((element) => (
