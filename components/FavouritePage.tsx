@@ -1,6 +1,6 @@
 import Link from "next/link";
 import react from "react";
-import { IFavouriteObj } from "../pages/favourites";
+import {IFavouriteObj} from '../pages/favourites';
 
 interface IFavouritesPageProps {
 	favourites: IFavouriteObj[];
@@ -10,7 +10,7 @@ const FavouritePage = ({ favourites }: IFavouritesPageProps) => {
 	return (
 		<>
 			<div className="titleHomePage">
-				<Link href={"/"}>
+				<Link href={"/"} passHref>
 					<h1>Npm Downloads</h1>
 				</Link>
 			</div>

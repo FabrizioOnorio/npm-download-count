@@ -42,6 +42,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 			setDownloadsData([]);
 		}
 		if (data?.downloads) {
+			console.log("render");
 			setDownloadsData(data.downloads);
 			const totalMonthlyDownloads = data?.downloads
 				.reduce(
@@ -65,7 +66,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 			}
 			setNumberDownloadsMonthly(totalMonthlyDownloads);
 		}
-	}, [data, downloadsData, downloadsDataWeek]);
+	}, [data]);
 
 	return (
 		<div className="homePage">
@@ -73,10 +74,11 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 				<h1>Npm Downloads</h1>
 			</div>
 			<div className="favouritesDiv">
-				<div className="favouritesDivLink">
-					<Link href={"/favourites"}>Favourites</Link>
-				</div>
+				<Link href={"/favourites"} passHref>
+					<p className="favouritesDivLink">Favourites</p>
+				</Link>
 			</div>
+
 			<div>
 				<InputSearch
 					handleSubmit={handleSubmit}

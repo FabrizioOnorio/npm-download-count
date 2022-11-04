@@ -56,8 +56,9 @@ const Package = ({
 
 	const handleClick = () => {
 		setFavourites((prev) => [...prev, gatheredPackageData]);
-		console.log(gatheredPackageData);
 	};
+
+  console.log(gatheredPackageData)
 
 	if (infos === undefined) return <p>Package not found</p>;
 	return (
@@ -85,11 +86,13 @@ const Package = ({
 				<div className="twoGraphs">
 					<div>
 						<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
-						<WeekColumns downloadsDataWeek={downloadsDataWeek} />
+						<WeekColumns
+							downloadsDataWeek={gatheredPackageData.downloadsDataWeek}
+						/>
 					</div>
 					<div>
 						<h3>Downloads last month: {" " + numberDownloadsMonthly}</h3>
-						<MonthColumns downloadsData={downloadsData} />
+						<MonthColumns downloadsData={gatheredPackageData.downloadsData} />
 					</div>
 				</div>
 				<button className="compareButton" onClick={handleClick}>
