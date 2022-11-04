@@ -36,9 +36,8 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 		refetchOnWindowFocus: false,
 		enabled: false,
 	});
-
 	useEffect(() => {
-		if (data?.downloads !== undefined) setDownloadsData(data.downloads);
+		if (data?.downloads) setDownloadsData(data.downloads);
 		if (data?.error === "not found") setDownloadsData([]);
 		if (data?.error === undefined) {
 			const totalMonthlyDownloads = data?.downloads
@@ -63,11 +62,18 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 			}
 			setNumberDownloadsMonthly(totalMonthlyDownloads);
 		}
-	}, [data?.downloads]);
+	}, [data]);
 
 	return (
 		<div className="homePage">
-			<h1>Npm Downloads</h1>
+			<div className="titleHomePage">
+				<h1>Npm Downloads</h1>
+			</div>
+			<div className="favouritesDiv">
+				<div className="favouritesDivLink">
+					<Link href={"/favourites"}>Favourites</Link>
+				</div>
+			</div>
 			<div>
 				<InputSearch
 					handleSubmit={handleSubmit}
@@ -75,7 +81,6 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 					setPackageName={setPackageName}
 				/>
 			</div>
-			<Link href={"/favourites"}>Favourites</Link>
 			<Package
 				infos={infos}
 				downloadsData={downloadsData}

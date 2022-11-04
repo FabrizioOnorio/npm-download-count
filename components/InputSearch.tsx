@@ -19,7 +19,8 @@ const InputSearch = ({
 				onChange={(e) => {
 					setPackageName(e.target.value);
 				}}
-				className="border-2 border-black-900 rounded-md p-2"
+				className="inputField"
+        placeholder="package name..."
 			/>
 		</form>
 	);

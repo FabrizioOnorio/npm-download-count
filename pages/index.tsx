@@ -13,7 +13,7 @@ const Home: NextPage<IHomeProps> = ({ setFavourites } ) => {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className="pb-0 py-10">
+			<div>
 				<Head>
 					<title>npm downloads</title>
 					<meta

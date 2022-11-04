@@ -1,18 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
 html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	font-family: "Space Mono", monospace;
 }
 
 a {
 	color: inherit;
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 * {
@@ -24,6 +24,7 @@ a {
 	flex-direction: column;
 	text-align: center;
 	gap: 1.5rem;
+	margin-bottom: 10rem;
 }
 
 .graphsData {
@@ -43,6 +44,99 @@ a {
 
 .linkHidden {
 	display: none;
+}
+
+.titleHomePage {
+	background-color: #000000;
+	height: 6rem;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+}
+
+.titleHomePage:hover {
+  cursor: pointer;
+}
+
+.inputField {
+	border: 1.5px solid #000000;
+	padding: 1rem;
+}
+
+.favouritesDiv {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 2rem;
+	text-decoration: none;
+}
+
+.favouritesDiv a {
+	text-decoration: none;
+}
+
+.favouritesDivLink {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 0.7rem;
+}
+.favouritesDivLink:hover {
+	background-color: #ffffff;
+	color: #000000;
+	padding: 0.62rem;
+	border: 0.08rem solid #000000;
+}
+
+.packageName {
+	font-size: 1.6rem;
+	margin-bottom: 1rem;
+}
+
+.compareButton {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 0.7rem;
+	margin-bottom: 3rem;
+}
+
+.compareButton:hover {
+	background-color: #ffffff;
+	color: #000000;
+	padding: 0.62rem;
+	border: 0.08rem solid #000000;
+	margin-bottom: 3rem;
+}
+
+.descriptionVisible {
+	margin-bottom: 1rem;
+}
+
+.linkVisible {
+	margin-bottom: 1.5rem;
+}
+
+.favouritesList {
+	margin: 2rem auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.favouriteElement {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+	max-width: 50rem;
+}
+
+.favouritesTitle {
+  display: flex;
+  margin-top: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (prefers-color-scheme: dark) {

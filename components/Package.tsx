@@ -59,18 +59,26 @@ const Package = ({
 	if (infos === undefined) return <p>Package not found</p>;
 	return (
 		<div>
-			<p className={infos.description.length > 0 ? "" : "descriptionHidden"}>
+			<h2 className="packageName">{displayNpmName}</h2>
+			<p
+				className={
+					infos.description.length > 0
+						? "descriptionVisible"
+						: "descriptionHidden"
+				}
+			>
 				{" " + infos.description}
 			</p>
 			<p className={infos.homepage.length > 0 ? "linkVisible" : "linkHidden"}>
-				<a href={infos.homepage}>{" " + infos.homepage}</a>
+				<a href={infos.homepage} target="_blank" rel="noreferrer">
+					{" " + infos.homepage}
+				</a>
 			</p>
 			<div
 				className={
 					downloadsData.length === 0 ? "graphsData" : "graphsAreShowing"
 				}
 			>
-				<h2>{displayNpmName}</h2>
 				<div className="twoGraphs">
 					<div>
 						<h3>Downloads last week: {" " + numberDownloadsWeekly}</h3>
@@ -81,7 +89,9 @@ const Package = ({
 						<MonthColumns downloadsData={downloadsData} />
 					</div>
 				</div>
-				<button onClick={handleClick}>Save to compare</button>
+				<button className="compareButton" onClick={handleClick}>
+					Save to compare
+				</button>
 			</div>
 		</div>
 	);
