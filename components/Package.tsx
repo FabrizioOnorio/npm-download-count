@@ -43,7 +43,7 @@ const Package = ({
 			numberDownloadsMonthly,
 			numberDownloadsWeekly,
 			infos,
-			id: uuidv4(),
+			id: "",
 		});
 	}, [
 		displayNpmName,
@@ -55,6 +55,16 @@ const Package = ({
 	]);
 
 	const handleClick = () => {
+		const newId = uuidv4();
+		setGatheredPackageData({
+			downloadsData,
+			downloadsDataWeek,
+			displayNpmName,
+			numberDownloadsMonthly,
+			numberDownloadsWeekly,
+			infos,
+			id: newId,
+		});
 		setFavourites((prev) => [...prev, gatheredPackageData]);
 	};
 

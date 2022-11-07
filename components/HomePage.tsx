@@ -41,6 +41,8 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 		if (data?.response.error === "not found") {
 			setDisplayNpmName("");
 			setDownloadsData([]);
+      setInfos(data.responseInfos);
+
 		}
 		if (data?.response.downloads) {
 			console.log("render");
@@ -72,7 +74,6 @@ const HomePage = ({ setFavourites }: IHomePage) => {
       setInfos(data.responseInfos);
 		}
 	}, [data]);
-
 	return (
 		<div className="homePage">
 			<div className="titleHomePage">

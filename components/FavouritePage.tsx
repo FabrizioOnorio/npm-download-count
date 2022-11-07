@@ -23,8 +23,8 @@ const FavouritePage = ({ favourites }: IFavouritesPageProps) => {
 			</div>
 			<div className="favouritesList">
 				{favourites.map((element) => (
-					<div key={element.displayNpmName} className="favouriteElement">
-						<p>{element.id}:</p>
+					<div key={element.id} className="favouriteElement">
+						<p>{element.displayNpmName}:</p>
 						<p>Downloads last week:{" " + element.numberDownloadsWeekly}</p>
 						<p>Downloads last month:{" " + element.numberDownloadsWeekly}</p>
 					</div>
