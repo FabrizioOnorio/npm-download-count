@@ -20,41 +20,45 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 	);
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-		const responseInfos = await fetch(`/api/informations/${packageName}`);
-		const dataInfos = await responseInfos.json();
-		setInfos(dataInfos);
 		refetch();
 		setPackageName("");
 	};
 
-	const getNumberDownloads = async () => {
+	const getDataDownloads = async () => {
 		const response = await fetch(`/api/downloads/${packageName}`);
-		return response.json();
-	};
+		const responseInfos = await fetch(`/api/informations/${packageName}`);
+		const downloads = await response.json();
+    const infos = await responseInfos.json()
+		return { response: downloads, responseInfos: infos };
+	};;
 
-	const { data, refetch } = useQuery("numberDownloads", getNumberDownloads, {
+	const { data, refetch } = useQuery("numberDownloads", getDataDownloads, {
 		refetchOnWindowFocus: false,
 		enabled: false,
 	});
+
 	useEffect(() => {
-		if (data?.error === "not found") {
+		if (data?.response.error === "not found") {
 			setDisplayNpmName("");
 			setDownloadsData([]);
 		}
-		if (data?.downloads) {
+		if (data?.response.downloads) {
 			console.log("render");
-			setDownloadsData(data.downloads);
-			const totalMonthlyDownloads = data?.downloads
+			setDownloadsData(data.response.downloads);
+			const totalMonthlyDownloads = data?.response.downloads
 				.reduce(
 					(acc: number, curr: { downloads: number }) => acc + curr.downloads,
 					0
 				)
 				.toLocaleString("de");
-			if (data?.downloads) {
+			if (data?.response.downloads) {
 				setDisplayNpmName(
-					data.package[0].toUpperCase() + data.package.substr(1)
+					data.response.package[0].toUpperCase() +
+						data.response.package.substr(1)
 				);
-				const lastWeekData = data.downloads.slice(data.downloads.length - 7);
+				const lastWeekData = data.response.downloads.slice(
+					data.response.downloads.length - 7
+				);
 				setDownloadsDataWeek(lastWeekData);
 				const totalWeeklyDownloads = lastWeekData
 					.reduce(
@@ -65,6 +69,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 				setNumberDownloadsWeekly(totalWeeklyDownloads);
 			}
 			setNumberDownloadsMonthly(totalMonthlyDownloads);
+      setInfos(data.responseInfos);
 		}
 	}, [data]);
 

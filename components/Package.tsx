@@ -58,8 +58,6 @@ const Package = ({
 		setFavourites((prev) => [...prev, gatheredPackageData]);
 	};
 
-  console.log(gatheredPackageData)
-
 	if (infos === undefined) return <p>Package not found</p>;
 	return (
 		<div>
