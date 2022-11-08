@@ -92,6 +92,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 					setPackageName={setPackageName}
 				/>
 			</div>
+      <div></div>
 			<Package
 				infos={infos}
 				downloadsData={downloadsData}
