@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WeekColumns from "./WeekColumns";
 import MonthColumns from "./MonthColumns";
 import { v4 as uuidv4 } from "uuid";
+import { useUser } from "@auth0/nextjs-auth0";
 
 interface IPackageProps {
 	downloadsData: object[];
@@ -34,6 +35,7 @@ const Package = ({
 		infos,
 		id: "",
 	});
+	const { user } = useUser();
 
 	useEffect(() => {
 		setGatheredPackageData({
@@ -103,7 +105,12 @@ const Package = ({
 						<MonthColumns downloadsData={gatheredPackageData.downloadsData} />
 					</div>
 				</div>
-				<button className="compareButton" onClick={handleClick}>
+
+				<button
+					className="compareButton"
+					onClick={handleClick}
+					style={{ display: user ? "block" : "none" }}
+				>
 					Save to compare
 				</button>
 			</div>

@@ -3,6 +3,7 @@ import InputSearch from "./InputSearch";
 import Package from "./Package";
 import { useQuery } from "react-query";
 import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0";
 
 interface IHomePage {
 	setFavourites: Dispatch<SetStateAction<object[]>>;
@@ -23,15 +24,14 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 		refetch();
 		setPackageName("");
 	};
-
+	const { user, error, isLoading } = useUser();
 	const getDataDownloads = async () => {
 		const response = await fetch(`/api/downloads/${packageName}`);
 		const responseInfos = await fetch(`/api/informations/${packageName}`);
 		const downloads = await response.json();
-    const infos = await responseInfos.json()
+		const infos = await responseInfos.json();
 		return { response: downloads, responseInfos: infos };
-	};;
-
+	};
 	const { data, refetch } = useQuery("numberDownloads", getDataDownloads, {
 		refetchOnWindowFocus: false,
 		enabled: false,
@@ -41,8 +41,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 		if (data?.response.error === "not found") {
 			setDisplayNpmName("");
 			setDownloadsData([]);
-      setInfos(data.responseInfos);
-
+			setInfos(data.responseInfos);
 		}
 		if (data?.response.downloads) {
 			console.log("render");
@@ -71,20 +70,45 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 				setNumberDownloadsWeekly(totalWeeklyDownloads);
 			}
 			setNumberDownloadsMonthly(totalMonthlyDownloads);
-      setInfos(data.responseInfos);
+			setInfos(data.responseInfos);
 		}
 	}, [data]);
+	if (isLoading) return <div className="loading">Loading...</div>;
+	if (error) return <div>{error.message}</div>;
 	return (
 		<div className="homePage">
 			<div className="titleHomePage">
 				<h1>Npm Downloads</h1>
 			</div>
 			<div className="favouritesDiv">
+				<a
+					href="/api/auth/login"
+					className="login"
+					style={{ display: user ? "none" : "block" }}
+				>
+					Login
+				</a>
+				<a
+					href="/api/auth/logout"
+					className="logout"
+					style={{ display: user ? "block" : "none" }}
+				>
+					Logout
+				</a>
 				<Link href={"/favourites"} passHref>
-					<p className="favouritesDivLink">Favourites</p>
+					<p
+						className="favouritesDivLink"
+						style={{ display: user ? "block" : "none" }}
+					>
+						Favourites
+					</p>
 				</Link>
 			</div>
 
+			<div style={{ display: user ? "block" : "none" }}>
+				<h2>Hi{" " + user?.name?.split(" ")[0]}!</h2>
+				<p>Search for a NPM library: </p>
+			</div>
 			<div>
 				<InputSearch
 					handleSubmit={handleSubmit}
@@ -92,7 +116,6 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 					setPackageName={setPackageName}
 				/>
 			</div>
-      <div></div>
 			<Package
 				infos={infos}
 				downloadsData={downloadsData}
