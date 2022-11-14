@@ -7,9 +7,10 @@ import { useUser } from "@auth0/nextjs-auth0";
 
 interface IHomePage {
 	setFavourites: Dispatch<SetStateAction<object[]>>;
+	favourites: object[];
 }
 
-const HomePage = ({ setFavourites }: IHomePage) => {
+const HomePage = ({ setFavourites, favourites }: IHomePage) => {
 	const [packageName, setPackageName] = useState("");
 	const [downloadsData, setDownloadsData] = useState<object[]>([]);
 	const [downloadsDataWeek, setDownloadsDataWeek] = useState<object[]>([]);
@@ -44,7 +45,6 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 			setInfos(data.responseInfos);
 		}
 		if (data?.response.downloads) {
-			console.log("render");
 			setDownloadsData(data.response.downloads);
 			const totalMonthlyDownloads = data?.response.downloads
 				.reduce(
@@ -81,20 +81,16 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 				<h1>Npm Downloads</h1>
 			</div>
 			<div className="favouritesDiv">
-				<a
-					href="/api/auth/login"
-					className="login"
-					style={{ display: user ? "none" : "block" }}
-				>
-					Login
-				</a>
-				<a
-					href="/api/auth/logout"
-					className="logout"
-					style={{ display: user ? "block" : "none" }}
-				>
-					Logout
-				</a>
+				<Link href={"/api/auth/login"}>
+					<a className="login" style={{ display: user ? "none" : "block" }}>
+						Login
+					</a>
+				</Link>
+				<Link href="/api/auth/logout">
+					<a className="logout" style={{ display: user ? "block" : "none" }}>
+						Logout
+					</a>
+				</Link>
 				<Link href={"/favourites"} passHref>
 					<p
 						className="favouritesDivLink"
@@ -124,6 +120,7 @@ const HomePage = ({ setFavourites }: IHomePage) => {
 				numberDownloadsMonthly={numberDownloadsMonthly}
 				numberDownloadsWeekly={numberDownloadsWeekly}
 				setFavourites={setFavourites}
+				favourites={favourites}
 			/>
 		</div>
 	);

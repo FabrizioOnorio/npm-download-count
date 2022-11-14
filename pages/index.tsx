@@ -6,9 +6,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 interface IHomeProps {
 	setFavourites: Dispatch<SetStateAction<object[]>>;
+	favourites: object[];
 }
 
-const Home: NextPage<IHomeProps> = ({ setFavourites } ) => {
+const Home: NextPage<IHomeProps> = ({ setFavourites, favourites } ) => {
 	const queryClient = new QueryClient();
 
 	return (
@@ -22,7 +23,7 @@ const Home: NextPage<IHomeProps> = ({ setFavourites } ) => {
 					/>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
-				<HomePage setFavourites={setFavourites} />
+				<HomePage setFavourites={setFavourites} favourites={favourites} />
 			</div>
 		</QueryClientProvider>
 	);

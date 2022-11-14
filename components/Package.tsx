@@ -15,9 +15,21 @@ interface IPackageProps {
 	numberDownloadsMonthly: number;
 	numberDownloadsWeekly: number;
 	setFavourites: React.Dispatch<React.SetStateAction<object[]>>;
+	favourites: object[];
+}
+
+interface IPackage {
+	downloadsData: object;
+	downloadsDataWeek: number;
+	displayNpmName: string;
+	numberDownloadsMonthly: number;
+	numberDownloadsWeekly: number;
+	infos: string;
+	id: string;
 }
 
 const Package = ({
+	favourites,
 	downloadsData,
 	downloadsDataWeek,
 	infos,
@@ -67,7 +79,19 @@ const Package = ({
 			infos,
 			id: newId,
 		});
-		setFavourites((prev) => [...prev, gatheredPackageData]);
+
+		let packageCount: number = 0;
+		favourites.forEach((item: any): void => {
+			if (item.displayNpmName === gatheredPackageData.displayNpmName) {
+				packageCount++;
+			}
+		});
+		if (packageCount > 0) {
+			alert("package already saved");
+		} else {
+			setFavourites((prev) => [...prev, gatheredPackageData]);
+		}
+		packageCount = 0;
 	};
 
 	if (infos === undefined) return <p>Package not found</p>;
