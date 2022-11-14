@@ -25,6 +25,7 @@ a {
 	text-align: center;
 	gap: 1.5rem;
 	margin-bottom: 10rem;
+  max-height: 100vh;
 }
 
 .graphsData {
@@ -102,7 +103,7 @@ a {
 	background-color: #000000;
 	color: #ffffff;
 	padding: 0.7rem;
-	margin: 3rem auto -1rem auto;
+	margin: 0rem auto 3rem auto;
 }
 
 .compareButton:hover {
@@ -115,6 +116,7 @@ a {
 
 .descriptionVisible {
 	margin-bottom: 1rem;
+  padding: 0 0.5rem;
 }
 
 .linkVisible {
