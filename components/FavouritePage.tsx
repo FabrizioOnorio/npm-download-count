@@ -1,12 +1,14 @@
 import Link from "next/link";
-import react from "react";
-import {IFavouriteObj} from '../pages/favourites';
+import react, { Dispatch, SetStateAction } from "react";
+import Favourite from "./Favourite";
+import { IFavouriteObj } from "../pages/favourites";
 
 interface IFavouritesPageProps {
 	favourites: IFavouriteObj[];
+	setFavourites: Dispatch<SetStateAction<object[]>>;
 }
 
-const FavouritePage = ({ favourites }: IFavouritesPageProps) => {
+const FavouritePage = ({ favourites, setFavourites }: IFavouritesPageProps) => {
 	return (
 		<>
 			<div className="titleHomePage">
@@ -23,11 +25,12 @@ const FavouritePage = ({ favourites }: IFavouritesPageProps) => {
 			</div>
 			<div className="favouritesList">
 				{favourites.map((element) => (
-					<div key={element.displayNpmName} className="favouriteElement">
-						<p>{element.displayNpmName}:</p>
-						<p>Downloads last week:{" " + element.numberDownloadsWeekly}</p>
-						<p>Downloads last month:{" " + element.numberDownloadsWeekly}</p>
-					</div>
+					<Favourite
+						setFavourites={setFavourites}
+						key={element.displayNpmName}
+						element={element}
+            favourites={favourites}
+					/>
 				))}
 			</div>
 		</>

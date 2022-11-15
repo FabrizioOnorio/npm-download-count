@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import react, { useEffect } from "react";
+import react, { Dispatch, SetStateAction, useEffect } from "react";
 import FavouritePage from "../components/FavouritePage";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
@@ -15,10 +15,11 @@ export interface IFavouriteObj {
 }
 
 interface IFavouritesProps {
+	setFavourites: Dispatch<SetStateAction<object[]>>;
 	favourites: IFavouriteObj[];
 }
 
-export const Favourites: NextPage<IFavouritesProps> = ({ favourites }) => {
+export const Favourites: NextPage<IFavouritesProps> = ({ favourites, setFavourites }) => {
 	 const { user, isLoading } = useUser();
 		const router = useRouter();
 
@@ -30,7 +31,7 @@ export const Favourites: NextPage<IFavouritesProps> = ({ favourites }) => {
 
 	return (
 		<div style={{display: user ? 'block': 'none'}}>
-			<FavouritePage favourites={favourites} />
+			<FavouritePage favourites={favourites} setFavourites={setFavourites} />
 		</div>
 	);
 };
