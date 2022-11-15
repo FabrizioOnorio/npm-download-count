@@ -25,7 +25,7 @@ a {
 	text-align: center;
 	gap: 1.5rem;
 	margin-bottom: 10rem;
-  max-height: 100vh;
+	max-height: 100vh;
 }
 
 .graphsData {
@@ -58,7 +58,7 @@ a {
 }
 
 .titleHomePage:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .inputField {
@@ -116,7 +116,7 @@ a {
 
 .descriptionVisible {
 	margin-bottom: 1rem;
-  padding: 0 0.5rem;
+	padding: 0 0.5rem;
 }
 
 .linkVisible {
@@ -139,34 +139,65 @@ a {
 }
 
 .favouritesTitle {
-  display: flex;
-  margin-top: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	margin-top: 2rem;
+	height: 2rem;
+	align-items: center;
+	justify-content: center;
 }
 
 .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
 }
 
 .deleteButton {
-  background-color: #ffffff;
-  color: #000000;
-  padding: 0 0.1rem;
+	background-color: #ffffff;
+	color: #000000;
+	padding: 0 0.1rem;
 }
 
 .deleteButton:hover {
-  background-color: #ff595e;
+	background-color: #ff595e;
 }
 
 .favouriteFirtLine {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.addedVisible {
+	display: block;
+	background-color: #cce3de;
+	color: #6b9080;
+	border: 2px solid #6b9080;
+	margin: auto 3rem;
+}
+
+.addedVisible p {
+	margin: 1rem auto 1rem auto;
+}
+
+.addedNotVisible {
+	display: none;
+}
+
+.alreadyAddedVisible {
+	display: block;
+	background-color: #ff8fa3;
+	color: #8d0801;
+	border: 2px solid #8d0801;
+	margin: auto 3rem;
+}
+
+.alreadyAddedVisible p {
+	margin: 1rem auto 1rem auto;
+}
+.alreadyAddedNotVisible {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {

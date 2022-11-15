@@ -47,6 +47,8 @@ const Package = ({
 		infos,
 		id: "",
 	});
+  const [added, setAdded] = useState(false);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -87,9 +89,12 @@ const Package = ({
 			}
 		});
 		if (packageCount > 0) {
-			alert("package already saved");
+			setAlreadyAdded(true);
+      setTimeout(() => setAlreadyAdded(false), 2000);
 		} else {
 			setFavourites((prev) => [...prev, gatheredPackageData]);
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
 		}
 		packageCount = 0;
 	};
@@ -97,6 +102,12 @@ const Package = ({
 	if (infos === undefined) return <p>Package not found</p>;
 	return (
 		<div>
+      <div className={added ? 'addedVisible' : 'addedNotVisible'}>
+        <p>Informations added to your favorites</p>
+      </div>
+      <div className={alreadyAdded ? 'alreadyAddedVisible' : 'alreadyAddedNotVisible'}>
+        <p>Item alredy added to your favorites</p>
+      </div>
 			<h2 className="packageName">{displayNpmName}</h2>
 			<p
 				className={
