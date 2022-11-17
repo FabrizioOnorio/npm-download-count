@@ -18,13 +18,13 @@ const FavouritePage = ({ favourites, setFavourites }: IFavouritesPageProps) => {
 			</div>
 			<div className="favouritesTitle">
 				<h2>
-					{favourites.length > 0
+					{favourites?.length > 0
 						? "Your List to compare:"
 						: "Nothing saved yet :-)"}
 				</h2>
 			</div>
 			<div className="favouritesList">
-				{favourites.map((element) => (
+				{favourites?.map((element) => (
 					<Favourite
 						setFavourites={setFavourites}
 						key={element.displayNpmName}
