@@ -4,9 +4,19 @@ import HomePage from "../components/HomePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Dispatch, SetStateAction, useState } from "react";
 
+interface IPackage {
+	downloadsData: object;
+	downloadsDataWeek: number;
+	displayNpmName: string;
+	numberDownloadsMonthly: number;
+	numberDownloadsWeekly: number;
+	infos: string;
+	id: string;
+}
+
 interface IHomeProps {
 	setFavourites: Dispatch<SetStateAction<object[]>>;
-	favourites: object[];
+	favourites: IPackage[];
 }
 
 const Home: NextPage<IHomeProps> = ({ setFavourites, favourites } ) => {
