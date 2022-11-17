@@ -5,9 +5,19 @@ import { useQuery } from "react-query";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0";
 
+interface IPackage {
+	downloadsData: object;
+	downloadsDataWeek: number;
+	displayNpmName: string;
+	numberDownloadsMonthly: number;
+	numberDownloadsWeekly: number;
+	infos: string;
+	id: string;
+}
+
 interface IHomePage {
 	setFavourites: Dispatch<SetStateAction<object[]>>;
-	favourites: object[];
+	favourites: IPackage[];
 }
 
 const HomePage = ({ setFavourites, favourites }: IHomePage) => {
