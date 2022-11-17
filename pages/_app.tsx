@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		if (typeof window !== "undefined") {
 			localStorage.setItem("favorites", JSON.stringify(favourites));
 		}
-	}, [favourites]);
+	}, []);
 	return (
 		<UserProvider>
 			<Component
