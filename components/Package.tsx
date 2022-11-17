@@ -15,7 +15,7 @@ interface IPackageProps {
 	numberDownloadsMonthly: number;
 	numberDownloadsWeekly: number;
 	setFavourites: React.Dispatch<React.SetStateAction<object[]>>;
-	favourites: object[];
+	favourites: IPackage[];
 }
 
 interface IPackage {
@@ -47,8 +47,8 @@ const Package = ({
 		infos,
 		id: "",
 	});
-  const [added, setAdded] = useState(false);
-  const [alreadyAdded, setAlreadyAdded] = useState(false);
+	const [added, setAdded] = useState(false);
+	const [alreadyAdded, setAlreadyAdded] = useState(false);
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -83,18 +83,18 @@ const Package = ({
 		});
 
 		let packageCount: number = 0;
-		favourites.forEach((item: any): void => {
+		favourites.forEach((item: IPackage) => {
 			if (item.displayNpmName === gatheredPackageData.displayNpmName) {
 				packageCount++;
 			}
 		});
 		if (packageCount > 0) {
 			setAlreadyAdded(true);
-      setTimeout(() => setAlreadyAdded(false), 2000);
+			setTimeout(() => setAlreadyAdded(false), 2000);
 		} else {
 			setFavourites((prev) => [...prev, gatheredPackageData]);
-      setAdded(true);
-      setTimeout(() => setAdded(false), 2000);
+			setAdded(true);
+			setTimeout(() => setAdded(false), 2000);
 		}
 		packageCount = 0;
 	};
@@ -102,12 +102,16 @@ const Package = ({
 	if (infos === undefined) return <p>Package not found</p>;
 	return (
 		<div>
-      <div className={added ? 'addedVisible' : 'addedNotVisible'}>
-        <p>Informations added to your favorites</p>
-      </div>
-      <div className={alreadyAdded ? 'alreadyAddedVisible' : 'alreadyAddedNotVisible'}>
-        <p>Item alredy added to your favorites</p>
-      </div>
+			<div className={added ? "addedVisible" : "addedNotVisible"}>
+				<p>Informations added to your favorites</p>
+			</div>
+			<div
+				className={
+					alreadyAdded ? "alreadyAddedVisible" : "alreadyAddedNotVisible"
+				}
+			>
+				<p>Item alredy added to your favorites</p>
+			</div>
 			<h2 className="packageName">{displayNpmName}</h2>
 			<p
 				className={

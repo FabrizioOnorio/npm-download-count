@@ -1,6 +1,6 @@
 import react, { Dispatch, SetStateAction } from "react";
 
-type Ifavourite = {
+interface Ifavourite {
 	displayNpmName: string;
 	numberDownloadsWeekly: number;
 	numberDownloadsMonthly: number;
@@ -9,18 +9,15 @@ type Ifavourite = {
 interface IFavouriteProps {
 	element: Ifavourite;
 	setFavourites: Dispatch<SetStateAction<object[]>>;
-	favourites: object[];
+	favourites: Ifavourite[];
 }
 
-const Favourite = ({
-	element,
-	setFavourites,
-	favourites,
-}: IFavouriteProps) => {
+const Favourite = ({ element, setFavourites, favourites }: IFavouriteProps) => {
 	const handleClick = () => {
 		setFavourites(
 			favourites.filter(
-				(favourite: any) => favourite.displayNpmName !== element.displayNpmName
+				(favourite: Ifavourite) =>
+					favourite.displayNpmName !== element.displayNpmName
 			)
 		);
 	};
